@@ -31,3 +31,28 @@ final class TweetsRepository {
     tweets.filter { $0.inReplyTo == inReplyTo }
   }
 }
+
+
+protocol ImageRepository {
+  func fetchImage() async throws -> { }
+}
+
+class ImageRepositoryImpl: ImageRepository {
+  
+  cacheRepo:
+  
+  init(clientNetworkStack: ClientNetworkStack) {
+    
+  }
+  
+  func fetchImage(@escaping completion (Image) -> Void) async throws -> {
+    clientNetworkStack.call(url) {
+      switch result {
+      case .success(let image) {
+        completion(image)
+      case .failure(let error) {
+        throws
+      }
+    }
+  }
+}
